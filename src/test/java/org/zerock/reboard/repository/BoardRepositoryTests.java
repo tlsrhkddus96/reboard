@@ -6,6 +6,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.reboard.entity.Board;
 import org.zerock.reboard.entity.Member;
 
+import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -30,6 +32,19 @@ public class BoardRepositoryTests {
             boardRepository.save(board);
 
         });
+
+    }
+
+    @Transactional
+    @Test
+    public void testRead1(){
+
+        Optional<Board> result = boardRepository.findById(100L);
+
+        Board board = result.get();
+
+        System.out.println(board);
+        System.out.println(board.getWriter());
 
     }
 
